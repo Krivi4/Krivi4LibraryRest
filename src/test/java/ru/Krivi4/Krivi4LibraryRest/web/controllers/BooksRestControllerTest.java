@@ -160,12 +160,11 @@ class BooksRestControllerTest {
     /** Тест освобождения книги от читателя */
     @Test
     void release_ReleasesBook() throws Exception {
-        // Подготовка: при запросе книги по id возвращаем наш тестовый объект
+       
         when(bookService.findById(1)).thenReturn(book);
-        // Маппер преобразует модель в объект ответа
+        
         when(bookViewMapper.toResponse(book)).thenReturn(bookResponse);
-
-        // Выполняем PUT-запрос на /books/1/release
+e
         mockMvc.perform(put("/books/1/release"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.messageBook").value("Книга с данными ниже освобождена "))
