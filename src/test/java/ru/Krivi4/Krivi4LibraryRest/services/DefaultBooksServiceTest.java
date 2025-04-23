@@ -13,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import ru.Krivi4.Krivi4LibraryRest.models.Book;
 import ru.Krivi4.Krivi4LibraryRest.models.Reader;
 import ru.Krivi4.Krivi4LibraryRest.repositories.BooksRepository;
-import ru.Krivi4.Krivi4LibraryRest.util.StubData;
 import ru.Krivi4.Krivi4LibraryRest.web.exceptions.BookNotFoundException;
 import ru.Krivi4.Krivi4LibraryRest.web.exceptions.OwnerNotFoundException;
 
@@ -37,6 +36,7 @@ class DefaultBooksServiceTest {
     private Book book;
     private Reader reader;
 
+    /** Установка параметров книги и читателя (перед каждым тестом)*/
     @BeforeEach
     void setUp() {
         book = new Book();
@@ -50,6 +50,7 @@ class DefaultBooksServiceTest {
         reader.setId(1);
     }
 
+    /** Тест вывода всех книг */
     @Test
     void findAll_ReturnsBooks() {
         Page<Book> page = new PageImpl<>(Collections.singletonList(book));
@@ -61,6 +62,7 @@ class DefaultBooksServiceTest {
         assertEquals("Test Book", result.getContent().get(0).getTitle());
     }
 
+    /** Тест вывода одной книги по id - успешно */
     @Test
     void findById_ReturnsBook() {
         when(booksRepository.findById(1)).thenReturn(Optional.of(book));
@@ -70,6 +72,7 @@ class DefaultBooksServiceTest {
         assertEquals("Test Book", result.getTitle());
     }
 
+    /** Тест вывода одной книги по id - не найдено */
     @Test
     void findById_ThrowsException_WhenNotFound() {
         when(booksRepository.findById(1)).thenReturn(Optional.empty());
@@ -77,6 +80,7 @@ class DefaultBooksServiceTest {
         assertThrows(BookNotFoundException.class, () -> bookService.findById(1));
     }
 
+    /** Тест сохранения книги*/
     @Test
     void save_SavesBook() {
         when(booksRepository.save(book)).thenReturn(book);
@@ -86,7 +90,7 @@ class DefaultBooksServiceTest {
         assertEquals("Test Book", result.getTitle());
         assertNotNull(result.getAddedAt());
     }
-
+    /** Тест обновления книги*/
     @Test
     void update_UpdatesBook() {
         Book updatedBook = new Book();
@@ -101,6 +105,7 @@ class DefaultBooksServiceTest {
         assertEquals("Updated Book", result.getTitle());
     }
 
+    /** Тест удаления книги */
     @Test
     void delete_DeletesBook() {
         bookService.delete(1);
@@ -108,6 +113,7 @@ class DefaultBooksServiceTest {
         verify(booksRepository).deleteById(1);
     }
 
+    /** Тест поиска книг по названию */
     @Test
     void searchByTitle_ReturnsBooks() {
         List<Book> books = Collections.singletonList(book);
@@ -119,6 +125,7 @@ class DefaultBooksServiceTest {
         assertEquals("Test Book", result.get(0).getTitle());
     }
 
+    /** Тест вывода владельца книги - успешно */
     @Test
     void getBookOwner_ReturnsOwner() {
         book.setOwner(reader);
@@ -128,7 +135,7 @@ class DefaultBooksServiceTest {
 
         assertEquals("Иванов Иван Иванович", result.getFullName());
     }
-
+    /** Тест вывода владельца книги - не найдено */
     @Test
     void getBookOwner_ThrowsException_WhenNoOwner() {
         book.setOwner(null);
@@ -137,6 +144,7 @@ class DefaultBooksServiceTest {
         assertThrows(OwnerNotFoundException.class, () -> bookService.getBookOwner(1));
     }
 
+    /** Тест назначения владельца книге */
     @Test
     void appoint_SetsOwner() {
         when(booksRepository.findById(1)).thenReturn(Optional.of(book));
@@ -147,28 +155,16 @@ class DefaultBooksServiceTest {
         assertNotNull(book.getTakenAt());
     }
 
+    /** Тест освобождения книги от владельца */
     @Test
-    void release_SetsPlaceholderReaderAndDefaultTakenAt() {
-
+    void release_SetsOwnerAndTakenAtToNull() {
         book.setOwner(reader);
         when(booksRepository.findById(book.getId())).thenReturn(Optional.of(book));
 
-
         bookService.release(book.getId());
 
-
-        assertNotNull(book.getOwner(),
-                "Владелец книги не должен быть null");
-        assertEquals(StubData.NO_OWNER.getId(), book.getOwner().getId(),
-                "ID владельца должен быть 0");
-        assertEquals(StubData.NO_OWNER.getFullName(), book.getOwner().getFullName(),
-                "Имя владельца должно быть 'Книга свободна'");
-        assertEquals(StubData.NO_OWNER.getEmail(), book.getOwner().getEmail(),
-                "Email владельца должен быть 'no-reply@example.com'");
-        assertEquals(StubData.NO_OWNER.getDateOfBirth(), book.getOwner().getDateOfBirth(),
-                "Дата рождения владельца должна быть 1900-01-01");
-        assertEquals(StubData.DEFAULT_TAKEN_AT, book.getTakenAt(),
-                "Время взятия книги должно быть DEFAULT_TAKEN_AT");
+        assertNull(book.getOwner(), "Владелец книги должен быть null");
+        assertNull(book.getTakenAt(), "Время взятия книги должно быть null");
 
         verify(booksRepository).findById(book.getId());
     }

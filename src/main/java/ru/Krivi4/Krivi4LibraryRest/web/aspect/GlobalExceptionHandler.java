@@ -17,6 +17,7 @@ public class GlobalExceptionHandler {
 
     // Book Exceptions
 
+    /** Книга по id не найдена */
     @ExceptionHandler(BookNotFoundException.class)
     public ResponseEntity<BookErrorResponse> handleBookNotFound(BookNotFoundException ex) {
         BookErrorResponse resp = new BookErrorResponse(
@@ -26,6 +27,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
     }
 
+    /** Обрабатывает исключения при некорректных операциях с книгой */
     @ExceptionHandler({BookNotCreatedException.class, BookNotUpdatedException.class, BookNotAppointException.class})
     public ResponseEntity<BookErrorResponse> handleBookBadRequest(RuntimeException ex) {
         BookErrorResponse resp = new BookErrorResponse(
@@ -35,6 +37,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
     }
 
+    /** Вылавливает запросы, которые не прошли валидацию */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<BookErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
         String msg = ex.getBindingResult().getFieldErrors().stream()
@@ -46,7 +49,7 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
     }
-
+    /** При выводе владельца у свободной книги */
     @ExceptionHandler(OwnerNotFoundException.class)
     public ResponseEntity<ReaderErrorResponse> handleOwnerNotFound(OwnerNotFoundException ex) {
         ReaderErrorResponse resp = new ReaderErrorResponse(
@@ -59,6 +62,7 @@ public class GlobalExceptionHandler {
 
     // --- Reader Exceptions ---
 
+    /** Читатель по id не найден */
     @ExceptionHandler(ReaderNotFoundException.class)
     public ResponseEntity<ReaderErrorResponse> handleReaderNotFound(ReaderNotFoundException ex) {
         ReaderErrorResponse resp = new ReaderErrorResponse(
@@ -67,7 +71,7 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
     }
-
+    /** Обрабатывает исключения при некорректных операциях с читателем */
     @ExceptionHandler({ReaderNotCreatedException.class, ReaderNotUpdatedException.class})
     public ResponseEntity<ReaderErrorResponse> handleReaderBadRequest(RuntimeException ex) {
         ReaderErrorResponse resp = new ReaderErrorResponse(
@@ -77,6 +81,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
     }
 
+    /** При обновлении или добавлении читателя с имеющимся в бд email */
     @ExceptionHandler(ReaderDuplicateEmailException.class)
     public ResponseEntity<ReaderErrorResponse> handleDuplicateEmail(ReaderDuplicateEmailException ex) {
         ReaderErrorResponse resp = new ReaderErrorResponse(

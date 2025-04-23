@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2caebc59-a3ca-42d9-b988-80d3cf043a09" name="Changes" comment="" />
+    <list default="true" id="2caebc59-a3ca-42d9-b988-80d3cf043a09" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/Krivi4/Krivi4LibraryRest/services/DefaultBooksService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/Krivi4/Krivi4LibraryRest/services/DefaultBooksService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/Krivi4/Krivi4LibraryRest/services/DefaultReadersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/Krivi4/Krivi4LibraryRest/services/DefaultReadersService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/Krivi4/Krivi4LibraryRest/util/StubData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/Krivi4/Krivi4LibraryRest/web/aspect/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/Krivi4/Krivi4LibraryRest/web/aspect/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/Krivi4/Krivi4LibraryRest/web/controllers/BooksRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/Krivi4/Krivi4LibraryRest/web/controllers/BooksRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/Krivi4/Krivi4LibraryRest/web/controllers/ReadersRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/Krivi4/Krivi4LibraryRest/web/controllers/ReadersRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/Krivi4/Krivi4LibraryRest/services/DefaultBooksServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/Krivi4/Krivi4LibraryRest/services/DefaultBooksServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/Krivi4/Krivi4LibraryRest/services/DefaultReadersServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/Krivi4/Krivi4LibraryRest/services/DefaultReadersServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/Krivi4/Krivi4LibraryRest/web/controllers/BooksRestControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/Krivi4/Krivi4LibraryRest/web/controllers/BooksRestControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ru/Krivi4/Krivi4LibraryRest/web/controllers/ReadersRestControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/Krivi4/Krivi4LibraryRest/web/controllers/ReadersRestControllerTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,40 +52,41 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.BooksRestControllerTest.executor": "Run",
-    "JUnit.DefaultBooksServiceTest.executor": "Run",
-    "JUnit.DefaultReadersServiceTest.executor": "Run",
-    "JUnit.ReadersRestControllerTest.executor": "Run",
-    "JUnit.ru.Krivi4.Krivi4LibraryRest in Krivi4LibraryRest.executor": "Run",
-    "Maven.Krivi4LibraryRest [clean].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.Krivi4LibraryRestApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/krivi4/IdeaProjects/Krivi4LibraryRest/src/main/java/ru/Krivi4/Krivi4LibraryRest/views",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Krivi4LibraryRestApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BooksRestControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DefaultBooksServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DefaultReadersServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ReadersRestControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ru.Krivi4.Krivi4LibraryRest in Krivi4LibraryRest.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Krivi4LibraryRest [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.Krivi4LibraryRestApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/krivi4/IdeaProjects/Krivi4LibraryRest&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/ru/Krivi4/Krivi4LibraryRest/views" />
@@ -87,7 +101,20 @@
       <recent name="ru.Krivi4.Krivi4LibraryRest.util" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Krivi4LibraryRestApplication">
+  <component name="RunManager" selected="JUnit.BooksRestControllerTest">
+    <configuration name="Krivi4LibraryRestApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.Krivi4.Krivi4LibraryRest.Krivi4LibraryRestApplication" />
+      <module name="Krivi4LibraryRest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.Krivi4.Krivi4LibraryRest.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BooksRestControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Krivi4LibraryRest" />
       <extension name="coverage">
@@ -103,7 +130,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DefaultReadersServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DefaultBooksServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Krivi4LibraryRest" />
       <extension name="coverage">
         <pattern>
@@ -112,23 +139,16 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="ru.Krivi4.Krivi4LibraryRest.services" />
-      <option name="MAIN_CLASS_NAME" value="ru.Krivi4.Krivi4LibraryRest.services.DefaultReadersServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="ru.Krivi4.Krivi4LibraryRest.services.DefaultBooksServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReadersRestControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Krivi4LibraryRest in Krivi4LibraryRest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Krivi4LibraryRest" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ru.Krivi4.Krivi4LibraryRest.web.controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="ru.Krivi4.Krivi4LibraryRest.web.controllers" />
-      <option name="MAIN_CLASS_NAME" value="ru.Krivi4.Krivi4LibraryRest.web.controllers.ReadersRestControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/ru/Krivi4/Krivi4LibraryRest" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -156,10 +176,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ru.Krivi4.Krivi4LibraryRest in Krivi4LibraryRest" />
-        <item itemvalue="JUnit.ReadersRestControllerTest" />
         <item itemvalue="JUnit.BooksRestControllerTest" />
-        <item itemvalue="JUnit.DefaultReadersServiceTest" />
+        <item itemvalue="JUnit.DefaultBooksServiceTest" />
+        <item itemvalue="Application.Krivi4LibraryRestApplication" />
+        <item itemvalue="JUnit.Krivi4LibraryRest in Krivi4LibraryRest" />
+        <item itemvalue="JUnit.ru.Krivi4.Krivi4LibraryRest in Krivi4LibraryRest" />
       </list>
     </recent_temporary>
   </component>
@@ -183,7 +204,12 @@
       <workItem from="1745094681491" duration="390000" />
       <workItem from="1745263690643" duration="34684000" />
       <workItem from="1745356255514" duration="2100000" />
-      <workItem from="1745358367423" duration="20576000" />
+      <workItem from="1745358367423" duration="21620000" />
+      <workItem from="1745410382913" duration="30000" />
+      <workItem from="1745410415432" duration="437000" />
+      <workItem from="1745410887620" duration="40000" />
+      <workItem from="1745411465273" duration="357000" />
+      <workItem from="1745411832279" duration="3867000" />
     </task>
     <servers />
   </component>

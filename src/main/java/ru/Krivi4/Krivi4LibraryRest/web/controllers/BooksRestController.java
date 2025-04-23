@@ -34,8 +34,8 @@ public class BooksRestController {
     private final ReaderViewMapper readerViewMapper;
 
 
-    //Read//
 
+    /** Вывод всех книг */
     @GetMapping()
     public List<BookResponse> getBooks(Pageable pageable){
         return booksService
@@ -44,17 +44,19 @@ public class BooksRestController {
                 .getContent();
     }
 
+    /** Вывод книги по id */
     @GetMapping("/{id}")
     public BookResponse getBook(@PathVariable("id") int id){
         return bookViewMapper.toResponse((booksService.findById(id)));
     }
 
+    /** Вывод владельца книги */
     @GetMapping("/{id}/owner")
     public ReaderResponse getBookOwner(@PathVariable("id") int id){
         return readerViewMapper.toResponse(booksService.getBookOwner(id));
     }
 
-    //Search
+    /** Вывод всех книг удовлетворяющих поисковому запросу */
     @GetMapping("/search")
     public List<BookResponse> search(@RequestParam("query") String query) {
         return booksService
@@ -64,7 +66,7 @@ public class BooksRestController {
                 .collect(Collectors.toList());
     }
 
-    //Create//
+    /** Создание книги + вывод сообщения */
     @PostMapping
     public ResponseEntity<Map<String, Object>> create(@RequestBody @Valid BookDTO bookDTO) {
 
@@ -84,28 +86,28 @@ public class BooksRestController {
 
 
 
-//Update//
-@PutMapping("/{id}/edit")
-public ResponseEntity<Map<String, Object>> update(@PathVariable("id") int id, @RequestBody @Valid BookDTO bookDTO) {
+    /** Обновление книги + вывод сообщения */
+    @PutMapping("/{id}/edit")
+    public ResponseEntity<Map<String, Object>> update(@PathVariable("id") int id, @RequestBody @Valid BookDTO bookDTO) {
 
-    Book toUpdate = bookDTOMapper.toEntity(bookDTO);
-    Book updated  = booksService.update(id, toUpdate);
-    BookResponse resp = bookViewMapper.toResponse(updated);
+        Book toUpdate = bookDTOMapper.toEntity(bookDTO);
+        Book updated  = booksService.update(id, toUpdate);
+        BookResponse resp = bookViewMapper.toResponse(updated);
 
-    Map<String,Object> body = new LinkedHashMap<>();
-    body.put("message",     "Книга с данными ниже обновлена");
-    body.put("title",    resp.getTitle());
-    body.put("author", resp.getAuthor());
-    body.put("year",    resp.getYear());
-
-
-    return ResponseEntity
-            .status(HttpStatus.OK)
-            .body(body);
-}
+        Map<String,Object> body = new LinkedHashMap<>();
+        body.put("message",     "Книга с данными ниже обновлена");
+        body.put("title",    resp.getTitle());
+        body.put("author", resp.getAuthor());
+        body.put("year",    resp.getYear());
 
 
-    //Delete//
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(body);
+    }
+
+
+    //** Удаление книги + вывод сообщения */
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") int id){
         Book b = booksService.findById(id);
@@ -123,7 +125,7 @@ public ResponseEntity<Map<String, Object>> update(@PathVariable("id") int id, @R
     }
 
 
-    //Appoint//
+    /** Назначение книги читателю + вывод сообщения */
     @PutMapping("/{id}/appoint")
     public ResponseEntity<Map<String, Object>> appoint(@PathVariable("id") int id, @RequestParam("readerId") int readerId) {
 
@@ -147,7 +149,7 @@ public ResponseEntity<Map<String, Object>> update(@PathVariable("id") int id, @R
         return ResponseEntity.ok(body);
     }
 
-    //Release//
+    /** Освобождение книги от читателя + вывод сообщения */
     @PutMapping("/{id}/release")
     public ResponseEntity<Map<String, Object>> release(@PathVariable("id") int id) {
 

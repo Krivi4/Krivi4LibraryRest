@@ -33,6 +33,7 @@ class DefaultReadersServiceTest {
 
     private Reader reader;
 
+    /** Установка параметров читателя (перед каждым тестом)*/
     @BeforeEach
     void setUp() {
         reader = new Reader("Иванов Иван Иванович",
@@ -40,6 +41,7 @@ class DefaultReadersServiceTest {
         reader.setId(1);
     }
 
+    /** Тесть поиска всех читателей */
     @Test
     void findAll_ReturnsReaders() {
         Page<Reader> page = new PageImpl<>(Collections.singletonList(reader));
@@ -51,6 +53,7 @@ class DefaultReadersServiceTest {
         assertEquals("Иванов Иван Иванович", result.getContent().get(0).getFullName());
     }
 
+    /** Тесть поиска читателя по id - упешно*/
     @Test
     void findById_ReturnsReader() {
         when(readersRepository.findById(1)).thenReturn(Optional.of(reader));
@@ -60,6 +63,7 @@ class DefaultReadersServiceTest {
         assertEquals("Иванов Иван Иванович", result.getFullName());
     }
 
+    /** Тесть поиска читателя по id - не найдено */
     @Test
     void findById_ThrowsException_WhenNotFound() {
         when(readersRepository.findById(1)).thenReturn(Optional.empty());
@@ -67,6 +71,7 @@ class DefaultReadersServiceTest {
         assertThrows(ReaderNotFoundException.class, () -> readerService.findById(1));
     }
 
+    /** Тест сохранения читателя */
     @Test
     void save_SavesReader() {
         when(readersRepository.existsByEmail("ivan@example.com")).thenReturn(false);
@@ -78,6 +83,7 @@ class DefaultReadersServiceTest {
         assertNotNull(result.getCreatedAt());
     }
 
+    /** Тест сохранения читателя, если emil у занят*/
     @Test
     void save_ThrowsException_WhenEmailExists() {
         when(readersRepository.existsByEmail("ivan@example.com")).thenReturn(true);
@@ -85,6 +91,7 @@ class DefaultReadersServiceTest {
         assertThrows(ReaderDuplicateEmailException.class, () -> readerService.save(reader));
     }
 
+    /** Тесть обновления читателя*/
     @Test
     void update_UpdatesReader() {
         Reader updatedReader = new Reader("Петров Петр Петрович", LocalDate.of(1985, 1, 1), "petr@example.com");
@@ -97,6 +104,7 @@ class DefaultReadersServiceTest {
         assertEquals("Петров Петр Петрович", result.getFullName());
     }
 
+    /** Тест удаления читателя*/
     @Test
     void delete_DeletesReader() {
         readerService.delete(1);

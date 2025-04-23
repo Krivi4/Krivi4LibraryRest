@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ru.Krivi4.Krivi4LibraryRest.dtos.ReaderDTO;
 import ru.Krivi4.Krivi4LibraryRest.mappers.dto.ReaderDTOMapper;
@@ -13,8 +11,7 @@ import ru.Krivi4.Krivi4LibraryRest.mappers.view.ReaderViewMapper;
 import ru.Krivi4.Krivi4LibraryRest.models.Reader;
 import ru.Krivi4.Krivi4LibraryRest.services.ReaderService;
 import ru.Krivi4.Krivi4LibraryRest.views.ReaderResponse;
-import ru.Krivi4.Krivi4LibraryRest.web.exceptions.ReaderNotCreatedException;
-import ru.Krivi4.Krivi4LibraryRest.web.exceptions.ReaderNotUpdatedException;
+
 
 import javax.validation.Valid;
 import java.util.LinkedHashMap;
@@ -31,7 +28,7 @@ public class ReadersRestController {
     private final ReaderViewMapper readerViewMapper;
 
 
-    //Read//
+    /** Вывод всех читателей */
     @GetMapping()
     public List<ReaderResponse> getReaders(Pageable pageable){
         return readerService
@@ -40,6 +37,7 @@ public class ReadersRestController {
                 .getContent();
     }
 
+    /** Вывод читателя по id */
     @GetMapping("/{id}")
     public ReaderResponse getReader(@PathVariable("id") int id){
         return readerViewMapper.toResponse(readerService.findById(id));
@@ -47,7 +45,7 @@ public class ReadersRestController {
 
 
 
-    //Create//
+    /** Создание читателя + вывод сообщения */
     @PostMapping
     public ResponseEntity<Map<String, Object>> create(@RequestBody @Valid ReaderDTO readerDTO) {
 
@@ -67,7 +65,7 @@ public class ReadersRestController {
 
 
 
-    //Update//
+    /** Обновление читателя + вывод сообщения */
     @PutMapping("/{id}/edit")
     public ResponseEntity<Map<String, Object>> update(@PathVariable("id") int id, @RequestBody @Valid ReaderDTO readerDTO) {
 
@@ -87,7 +85,8 @@ public class ReadersRestController {
 
 
 
-    //Delete//
+    /** Удаление читателя + вывод сообщения + если удалим читателя с взятой книгой
+     *  - книга удалиться вслед за читателем из бд */
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") int id){
 

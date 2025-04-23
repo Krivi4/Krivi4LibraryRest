@@ -51,6 +51,7 @@ class ReadersRestControllerTest {
     private ReaderDTO readerDTO;
     private ReaderResponse readerResponse;
 
+    /** Установка параметров модели, DTO, View читателя (перед каждым тестом)*/
     @BeforeEach
     void setUp() {
         reader = new Reader("Иванов Иван Иванович",
@@ -69,6 +70,7 @@ class ReadersRestControllerTest {
         readerResponse.setEmail("ivan@example.com");
     }
 
+    /** Тест вывода всех читателей */
     @Test
     void findAll_reader() throws Exception {
         Page<Reader> page = new PageImpl<>(Collections.singletonList(reader));
@@ -80,6 +82,7 @@ class ReadersRestControllerTest {
                 .andExpect(jsonPath("$[0].fullName").value("Иванов Иван Иванович"));
     }
 
+    /** Тест вывода одного читателя по id */
     @Test
     void findById_reader() throws Exception {
         when(readerService.findById(1)).thenReturn(reader);
@@ -89,6 +92,8 @@ class ReadersRestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fullName").value("Иванов Иван Иванович"));
     }
+
+    /** Тест создания читателя */
     @Test
     void create_reader() throws Exception {
         when(readerDTOMapper.toEntity(any(ReaderDTO.class))).thenReturn(reader);
@@ -106,6 +111,7 @@ class ReadersRestControllerTest {
                 .andExpect(jsonPath("$.fullName").value("Иванов Иван Иванович"));
     }
 
+    /** Тест обновления чиаттеля */
     @Test
     void update_reader() throws Exception {
         when(readerDTOMapper.toEntity(any(ReaderDTO.class))).thenReturn(reader);
@@ -123,7 +129,7 @@ class ReadersRestControllerTest {
                 .andExpect(jsonPath("$.fullName").value("Иванов Иван Иванович"));
     }
 
-
+    /** Тест удаления читателя*/
     @Test
     void delete_reader() throws Exception {
         when(readerService.findById(1)).thenReturn(reader);

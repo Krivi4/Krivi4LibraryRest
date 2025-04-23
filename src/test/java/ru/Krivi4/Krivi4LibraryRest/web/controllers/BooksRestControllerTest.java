@@ -55,6 +55,7 @@ class BooksRestControllerTest {
     private Reader reader;
     private ReaderResponse readerResponse;
 
+    /** Установка параметров модели, DTO, View книги и читателя (перед каждым тестом)*/
     @BeforeEach
     void setUp() {
         book = new Book();
@@ -83,6 +84,7 @@ class BooksRestControllerTest {
         readerResponse.setEmail("ivan@example.com");
     }
 
+    /** Тест вывода всех книг */
     @Test
     void getBooks_ReturnsBooks() throws Exception {
         Page<Book> page = new PageImpl<>(Collections.singletonList(book));
@@ -94,6 +96,7 @@ class BooksRestControllerTest {
                 .andExpect(jsonPath("$[0].title").value("Test Book"));
     }
 
+    /** Тест вывода книги по id*/
     @Test
     void getBook_ReturnsBook() throws Exception {
         when(bookService.findById(1)).thenReturn(book);
@@ -103,7 +106,7 @@ class BooksRestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Test Book"));
     }
-
+    /** Тест создания книги */
     @Test
     void create_CreatesBook() throws Exception {
         when(bookDTOMapper.toEntity(any(BookDTO.class))).thenReturn(book);
@@ -116,7 +119,7 @@ class BooksRestControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("Test Book"));
     }
-
+    /** Тест обновления книги */
     @Test
     void update_UpdatesBook() throws Exception {
         when(bookDTOMapper.toEntity(any(BookDTO.class))).thenReturn(book);
@@ -130,6 +133,7 @@ class BooksRestControllerTest {
                 .andExpect(jsonPath("$.title").value("Test Book"));
     }
 
+    /** Тест удаления книги */
     @Test
     void delete_DeletesBook() throws Exception {
         when(bookService.findById(1)).thenReturn(book);
@@ -140,6 +144,7 @@ class BooksRestControllerTest {
                 .andExpect(jsonPath("$.title").value("Test Book"));
     }
 
+    /** Тест назначения книги читателю*/
     @Test
     void appoint_AppointsReader() throws Exception {
         when(bookService.findById(1)).thenReturn(book);
@@ -150,5 +155,22 @@ class BooksRestControllerTest {
         mockMvc.perform(put("/books/1/appoint?readerId=1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Test Book"));
+    }
+
+    /** Тест освобождения книги от читателя */
+    @Test
+    void release_ReleasesBook() throws Exception {
+        // Подготовка: при запросе книги по id возвращаем наш тестовый объект
+        when(bookService.findById(1)).thenReturn(book);
+        // Маппер преобразует модель в объект ответа
+        when(bookViewMapper.toResponse(book)).thenReturn(bookResponse);
+
+        // Выполняем PUT-запрос на /books/1/release
+        mockMvc.perform(put("/books/1/release"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.messageBook").value("Книга с данными ниже освобождена "))
+                .andExpect(jsonPath("$.title").value("Test Book"))
+                .andExpect(jsonPath("$.author").value("Test Author"))
+                .andExpect(jsonPath("$.year").value(2020));
     }
 }

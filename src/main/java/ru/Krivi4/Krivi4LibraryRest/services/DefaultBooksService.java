@@ -16,7 +16,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static ru.Krivi4.Krivi4LibraryRest.util.StubData.*;
 
 @Service
 @RequiredArgsConstructor
@@ -25,12 +24,13 @@ public class DefaultBooksService implements BookService {
     private final BooksRepository booksRepository;
 
 
+    /** Выводит все книги */
     @Override
     @Transactional(readOnly = true)
     public Page<Book> findAll(Pageable pageable) {
         return booksRepository.findAll(pageable);
     }
-
+    /** Выводит одну книгу по id */
     @Override
     @Transactional(readOnly = true)
     public Book findById(int id) {
@@ -39,6 +39,7 @@ public class DefaultBooksService implements BookService {
                 .orElseThrow(() -> new BookNotFoundException(id));
     }
 
+    /** Выводит все книги подходящие под запрос */
     @Override
     @Transactional(readOnly = true)
     public List<Book> searchByTitle(String query)
@@ -46,6 +47,7 @@ public class DefaultBooksService implements BookService {
         return booksRepository.findByTitleStartingWithIgnoreCase(query);
     }
 
+    /** Выводит владельца книги */
     @Override
     @Transactional(readOnly = true)
     public Reader getBookOwner(int id) {
@@ -55,6 +57,8 @@ public class DefaultBooksService implements BookService {
                 .orElseThrow(() -> new OwnerNotFoundException(id));
     }
 
+    /** Сохраняет книгу (если не указаны какие-то параметры: закрывает их заглушками)
+     * +устанавливает время назначения книги читателю */
     @Override
     @Transactional
     public Book save(Book book) {
@@ -64,6 +68,8 @@ public class DefaultBooksService implements BookService {
         return book;
     }
 
+    /** Обновляет данные книги (если не указаны какие-то параметры: закрывает их заглушками)
+     * + устанавливает время назначения книги читателю */
     @Override
     @Transactional
     public Book update(int id, Book updatedBook) {
@@ -75,24 +81,27 @@ public class DefaultBooksService implements BookService {
         return updatedBook;
     }
 
+    /** Удаляет книгу */
     @Override
     @Transactional
     public void delete(int id) {
         booksRepository.deleteById(id);
     }
 
+    /** Освобождает книгу от владельца */
     @Override
     @Transactional
     public void release(int id) {
         booksRepository
                 .findById(id)
                 .ifPresent(book -> {
-            book.setOwner(NO_OWNER);
-            book.setTakenAt(DEFAULT_TAKEN_AT);
+            book.setOwner(null);
+            book.setTakenAt(null);
         });
 
     }
 
+    /** Назначает книгу читателю */
     @Override
     @Transactional
     public void appoint(int id, Reader selectedReader) {
@@ -104,27 +113,26 @@ public class DefaultBooksService implements BookService {
         });
     }
 
+    /** Устанавливает время взятия книги при назначении */
     private void enrichBook(Book book) {
         book.setAddedAt(LocalDateTime.now());
     }
 
+    /** Устанавливает заглушки если не были указаны какие-то параметры при запросе */
     private void applyStubs(Book book) {
         if (book.getTitle() == null || book.getTitle().isBlank()) {
-            book.setTitle(DEFAULT_TITLE);
+            book.setTitle("Название не указано");
         }
         if (book.getAuthor() == null || book.getAuthor().isBlank()) {
-            book.setAuthor(DEFAULT_AUTHOR);
+            book.setAuthor("Автор не указан");
         }
 
         Integer year = book.getYear();
         if (book.getYear() == null) {
-            book.setYear(DEFAULT_YEAR);
+            book.setYear(0);
         } else if (year < 0 || year > LocalDate.now().getYear()) {
             throw new IllegalArgumentException(
                     "Год должен быть в диапазоне от 0 до " + LocalDate.now().getYear());
-        }
-        if (book.getTakenAt() == null) {
-            book.setTakenAt(DEFAULT_TAKEN_AT);
         }
 
     }

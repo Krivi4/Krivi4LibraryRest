@@ -19,11 +19,12 @@ public class DefaultReadersService implements ReaderService {
     private final ReadersRepository readersRepository;
 
 
+    /** Выводит всех читателей*/
     @Override
     @Transactional(readOnly = true)
     public Page<Reader> findAll(Pageable pageable) { return readersRepository.findAll(pageable);
     }
-
+    /** Выводит одного читателя по id */
     @Override
     @Transactional(readOnly = true)
     public Reader findById(int id){
@@ -33,6 +34,7 @@ public class DefaultReadersService implements ReaderService {
     }
 
 
+    /** Сохраняет читателя + устанавливает время создания */
     @Override
     @Transactional
     public Reader save(Reader reader){
@@ -44,6 +46,7 @@ public class DefaultReadersService implements ReaderService {
         return reader;
     }
 
+    /** Обновляет данные читателя + устанавливает время обновления */
     @Override
     @Transactional
     public Reader update(int id, Reader updatedReader){
@@ -57,12 +60,14 @@ public class DefaultReadersService implements ReaderService {
         return updatedReader;
     }
 
+    /** Удаляет читателя */
     @Override
     @Transactional
     public void delete(int id){
         readersRepository.deleteById(id);
     }
 
+    /** Устанавливает время создания и обновления */
     private void enrichReader(Reader reader){
         reader.setCreatedAt(LocalDateTime.now());
         reader.setUpdatedAt(LocalDateTime.now());
